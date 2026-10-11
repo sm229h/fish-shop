@@ -1,0 +1,64 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: daryapak
+      POSTGRES_USER: daryapak
+      POSTGRES_PASSWORD: daryapak_dev_2024
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U daryapak -d daryapak"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: on-failure
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: ["sh", "-ec", "npm install && exec npm run dev"]
+    environment:
+      - DATABASE_URL=postgres://daryapak:daryapak_dev_2024@db:5432/daryapak
+      - JWT_SECRET=dev_jwt_secret_change_in_production
+      - PORT=4000
+      - NODE_ENV=development
+      - BASE44_PREVIEW_MODE
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:4000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 45s
+    restart: on-failure
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: ["sh", "-ec", "npm install && exec npm run dev"]
+    ports:
+      - "3000:5173"
+    environment:
+      - VITE_API_TARGET=http://backend:4000
+      - BASE44_PREVIEW_MODE
+      - __VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:5173 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 45s
+    restart: on-failure
+
+volumes:
+  pgdata:
