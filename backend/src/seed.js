@@ -8,7 +8,7 @@ async function seed() {
     const hash = await bcrypt.hash('admin123456', 10);
     await pool.query(
       `INSERT INTO users (email, password_hash, first_name, last_name, phone, role)
-       VALUES ('admin@daryapak.ir', $1, 'مدیر', 'سیستم', '02112345678', 'super_admin')`,
+       VALUES ('admin@daryapak.ir', $1, 'مدیر', 'سیستم', '06133345678', 'super_admin')`,
       [hash]
     );
     console.log('[seed] Admin user created: admin@daryapak.ir / admin123456');
@@ -76,9 +76,9 @@ async function seed() {
     const settings = {
       brand_name: 'دریاپاک',
       brand_slogan: 'تازه‌ترین محصولات دریایی',
-      phone: '021-12345678',
-      phone2: '0912-3456789',
-      address: 'تهران، خیابان ولیعصر، نرسیده به میدان ونک، پلاک ۱۲۳',
+      phone: '061-33345678',
+      phone2: '0916-7654321',
+      address: 'اهواز، خیابان کیانپارس، نبش کیانپارس شرقی، پلاک ۱۲۳',
       working_hours: 'شنبه تا پنجشنبه، ۸ صبح تا ۸ شب',
       about_text: 'دریاپاک با بیش از یک دهه تجربه در عرضه محصولات دریایی تازه، تضمین کیفیت و تازگی را به شما می‌دهد. محصولات ما مستقیماً از بنادر صید شده و با زنجیره سرد تخصصی به دست شما می‌رسد.',
       shipping_cost: '50000',
