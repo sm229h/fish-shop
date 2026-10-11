@@ -37,6 +37,22 @@ docker compose -f docker-compose.base44.yml up -d --build
 - Backend API: http://localhost:4000/api
 - PostgreSQL: internal (port 5432)
 
+## Deploying on Vercel (single service)
+
+The repo deploys as one: the Vite build is served statically and the whole
+Express API runs as the `api/index.js` serverless function — same origin, so
+no CORS or cookie configuration is needed (auth uses Bearer tokens).
+
+* Root `package.json` declares npm workspaces (`backend`, `frontend`).
+* `vercel.json` publishes `frontend/dist` and rewrites `/api/*` to the function.
+* The first request auto-applies migrations and seeds the catalogue + admin
+  account when the database is fresh (`backend/src/db/init.js`).
+* No manual `DATABASE_URL` is needed with Vercel Postgres (`Storage → Create
+  Database` injects `POSTGRES_URL` automatically). `JWT_SECRET` is optional
+  (without it an ephemeral secret is generated and logins reset on restart).
+
+Steps: connect repo → create Postgres database → Deploy.
+
 ## Admin Access (dev seed)
 - Email: admin@daryapak.ir
 - Password: admin123456

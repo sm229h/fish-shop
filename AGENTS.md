@@ -44,3 +44,29 @@ All local — no external secrets needed:
 3. `curl http://localhost:3000/api/products?limit=2` — should return product JSON
 4. Login at `/login` with admin credentials, navigate to `/admin` dashboard.
 5. Browse products at `/products`, add to cart, checkout flow at `/checkout`.
+
+## Unified production deploy (Vercel, single service)
+
+* Root `package.json` declares npm workspaces (`backend`, `frontend`) — keep the
+  `daryapak-backend` / `daryapak-frontend` names in sync with it. Do not delete
+  the nested `backend/package-lock.json` / `frontend/package-lock.json`; the
+  docker dev services install standalone from them.
+* `vercel.json` (root) publishes `frontend/dist` and rewrites `/api/*` to the
+  `api/index.js` serverless function, which wraps `createApp()` (from
+  `backend/src/app.js`) and awaits `ensureDatabaseReady()` first. Auth uses
+  Bearer tokens in localStorage — no cookie/CORS work needed, frontend always
+  calls relative `/api/...`.
+* `backend/src/db/init.js` auto-applies migrations on first request and seeds
+  only when no admin user exists (seed fills empty tables only). Never seed
+  when users exist.
+* `config/env.js` reads `DATABASE_URL` → `POSTGRES_PRISMA_URL` → `POSTGRES_URL`
+  (Vercel Postgres provides the latter two automatically) and falls back to an
+  ephemeral `JWT_SECRET` with a loud warning when none is configured.
+* `db/pool.js` enables TLS (`rejectUnauthorized: false`) only for non-localhost
+  hosts — managed PG poolers use self-signed chains Node would otherwise reject
+  («self-signed certificate in certificate chain»). `PG_SSL_VERIFY=1` forces
+  strict verification; pool size shrinks to 3 when `VERCEL` is set.
+  `?sslmode=*` params are stripped from the connection string first because
+  node-postgres lets the parsed URL overwrite the explicit `ssl` option.
+* `migrate.js` throws on failure (no `process.exit`) so serverless boot can
+  answer 503; the CLI entry still exits non-zero.

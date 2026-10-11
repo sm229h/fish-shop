@@ -35,15 +35,21 @@ async function migrate() {
     console.log('[migrate] All migrations applied');
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {});
-    console.error('[migrate] Failed:', err.message);
-    process.exit(1);
+    // Throw (instead of process.exit) so serverless boot can catch this and
+    // answer 503; the CLI entry below still exits non-zero on failure.
+    throw new Error(`[migrate] Failed: ${err.message}`);
   } finally {
     client.release();
   }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  migrate().then(() => process.exit(0));
+  migrate()
+    .then(() => process.exit(0))
+    .catch((err) => {
+      console.error(err.message);
+      process.exit(1);
+    });
 }
 
 export default migrate;

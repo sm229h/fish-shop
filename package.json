@@ -1,0 +1,16 @@
+{
+  "name": "daryapak",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm --workspace daryapak-frontend run build",
+    "start": "npm --workspace daryapak-backend run start",
+    "migrate": "npm --workspace daryapak-backend run migrate",
+    "seed": "npm --workspace daryapak-backend run seed"
+  }
+}
