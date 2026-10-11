@@ -43,28 +43,28 @@ async function seed() {
     catRows.rows.forEach(r => catMap[r.name] = r.id);
 
     const products = [
-      { name: 'سالمون نروژی', cat: 'ماهی‌های دریایی', desc: 'سالمون تازه نروژی', price: 850000, unit: 'کیلوگرم', stock: 50, featured: true },
-      { name: 'ماهی تن', cat: 'ماهی‌های دریایی', desc: 'تن دریایی درجه یک', price: 720000, unit: 'کیلوگرم', stock: 30, featured: true },
-      { name: 'ماهی شوریده', cat: 'ماهی‌های جنوب', desc: 'شوریده تازه خلیج فارس', price: 380000, unit: 'کیلوگرم', stock: 40, featured: false },
-      { name: 'ماهی سنگسر', cat: 'ماهی‌های جنوب', desc: 'سنگسر جنوبی', price: 420000, unit: 'کیلوگرم', stock: 25, featured: false },
-      { name: 'ماهی قزل‌آلا', cat: 'ماهی‌های پرورشی', desc: 'قزل‌آلا پرورشی درجه یک', price: 320000, unit: 'کیلوگرم', stock: 60, featured: true },
-      { name: 'ماهی کپور', cat: 'ماهی‌های پرورشی', desc: 'کپور پرورشی تازه', price: 180000, unit: 'کیلوگرم', stock: 80, featured: false },
-      { name: 'ماهی سفید', cat: 'ماهی‌های شمال', desc: 'سفید دریای خزر', price: 450000, unit: 'کیلوگرم', stock: 20, featured: false },
-      { name: 'ماهی کفال', cat: 'ماهی‌های شمال', desc: 'کفال دریای خزر', price: 390000, unit: 'کیلوگرم', stock: 15, featured: false },
-      { name: 'میگوی سفید', cat: 'میگو', desc: 'میگوی سفید تازه', price: 650000, unit: 'کیلوگرم', stock: 35, featured: true },
-      { name: 'میگوی سوخته', cat: 'میگو', desc: 'میگوی پخته و آماده', price: 780000, unit: 'کیلوگرم', stock: 20, featured: false },
-      { name: 'فیله سالمون', cat: 'محصولات پاک‌شده', desc: 'فیله آماده طبخ', price: 920000, unit: 'کیلوگرم', stock: 25, featured: true },
-      { name: 'فیله ماهی سفید', cat: 'محصولات پاک‌شده', desc: 'فیله پاک‌شده و آماده', price: 520000, unit: 'کیلوگرم', stock: 30, featured: false },
-      { name: 'خارگوش دریایی', cat: 'محصولات ویژه', desc: 'خارگوش تازه دریایی', price: 1100000, unit: 'کیلوگرم', stock: 10, featured: true },
-      { name: 'مارماهی دودی', cat: 'محصولات ویژه', desc: 'مارماهی دودی خاص', price: 980000, unit: 'کیلوگرم', stock: 8, featured: false },
+      { name: 'سالمون نروژی', cat: 'ماهی‌های دریایی', desc: 'سالمون تازه نروژی', price: 850000, unit: 'کیلوگرم', stock: 50, featured: true, img: 'https://images.unsplash.com/photo-1571110951027-0e1301b1d8a2?w=800&q=80' },
+      { name: 'ماهی تن', cat: 'ماهی‌های دریایی', desc: 'تن دریایی درجه یک', price: 720000, unit: 'کیلوگرم', stock: 30, featured: true, img: 'https://images.unsplash.com/photo-1611214774777-3d997a9d0e35?w=800&q=80' },
+      { name: 'ماهی شوریده', cat: 'ماهی‌های جنوب', desc: 'شوریده تازه خلیج فارس', price: 380000, unit: 'کیلوگرم', stock: 40, featured: false, img: 'https://images.unsplash.com/photo-1576330383200-2bf325cfec52?w=800&q=80' },
+      { name: 'ماهی سنگسر', cat: 'ماهی‌های جنوب', desc: 'سنگسر جنوبی', price: 420000, unit: 'کیلوگرم', stock: 25, featured: false, img: 'https://images.unsplash.com/photo-1623081156933-5c40087ccf3f?w=800&q=80' },
+      { name: 'ماهی قزل‌آلا', cat: 'ماهی‌های پرورشی', desc: 'قزل‌آلا پرورشی درجه یک', price: 320000, unit: 'کیلوگرم', stock: 60, featured: true, img: 'https://images.unsplash.com/photo-1763047254772-d84e8c3fa346?w=800&q=80' },
+      { name: 'ماهی کپور', cat: 'ماهی‌های پرورشی', desc: 'کپور پرورشی تازه', price: 180000, unit: 'کیلوگرم', stock: 80, featured: false, img: 'https://images.unsplash.com/photo-1541441056316-443fff347c40?w=800&q=80' },
+      { name: 'ماهی سفید', cat: 'ماهی‌های شمال', desc: 'سفید دریای خزر', price: 450000, unit: 'کیلوگرم', stock: 20, featured: false, img: 'https://images.unsplash.com/photo-1584229843115-4a67e3ebc8a9?w=800&q=80' },
+      { name: 'ماهی کفال', cat: 'ماهی‌های شمال', desc: 'کفال دریای خزر', price: 390000, unit: 'کیلوگرم', stock: 15, featured: false, img: 'https://images.unsplash.com/photo-1638436083307-d2420a6fdcad?w=800&q=80' },
+      { name: 'میگوی سفید', cat: 'میگو', desc: 'میگوی سفید تازه', price: 650000, unit: 'کیلوگرم', stock: 35, featured: true, img: 'https://images.unsplash.com/photo-1548587468-971ebe4c8c3b?w=800&q=80' },
+      { name: 'میگوی سوخته', cat: 'میگو', desc: 'میگوی پخته و آماده', price: 780000, unit: 'کیلوگرم', stock: 20, featured: false, img: 'https://images.unsplash.com/photo-1557267725-c530b236f446?w=800&q=80' },
+      { name: 'فیله سالمون', cat: 'محصولات پاک‌شده', desc: 'فیله آماده طبخ', price: 920000, unit: 'کیلوگرم', stock: 25, featured: true, img: 'https://images.unsplash.com/photo-1556978252-55ae70c2ac8d?w=800&q=80' },
+      { name: 'فیله ماهی سفید', cat: 'محصولات پاک‌شده', desc: 'فیله پاک‌شده و آماده', price: 520000, unit: 'کیلوگرم', stock: 30, featured: false, img: 'https://images.unsplash.com/photo-1764345808930-834d813670fc?w=800&q=80' },
+      { name: 'خارگوش دریایی', cat: 'محصولات ویژه', desc: 'خارگوش تازه دریایی', price: 1100000, unit: 'کیلوگرم', stock: 10, featured: true, img: 'https://images.unsplash.com/photo-1718828862257-0d4cd1f124ee?w=800&q=80' },
+      { name: 'مارماهی دودی', cat: 'محصولات ویژه', desc: 'مارماهی دودی خاص', price: 980000, unit: 'کیلوگرم', stock: 8, featured: false, img: 'https://images.unsplash.com/photo-1764345960391-9b66a2541deb?w=800&q=80' },
     ];
 
     for (const p of products) {
       await pool.query(
         `INSERT INTO products (category_id, name, short_description, full_description, price, unit, stock,
-          min_order, max_order, step, is_featured, is_active, in_stock, low_stock_threshold)
-         VALUES ($1, $2, $3, $3, $4, $5, $6, 0.5, 20, 0.5, $7, true, true, 5)`,
-        [catMap[p.cat] || null, p.name, p.desc, p.price, p.unit, p.stock, p.featured]
+          min_order, max_order, step, is_featured, is_active, in_stock, image_url, low_stock_threshold)
+         VALUES ($1, $2, $3, $3, $4, $5, $6, 0.5, 20, 0.5, $7, true, true, $8, 5)`,
+        [catMap[p.cat] || null, p.name, p.desc, p.price, p.unit, p.stock, p.featured, p.img]
       );
     }
     console.log('[seed] Products created');

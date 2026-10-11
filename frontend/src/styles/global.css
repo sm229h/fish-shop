@@ -175,7 +175,7 @@ h3 { font-size: 1.2rem; }
 /* ── Hero ── */
 .hero { position: relative; min-height: 420px; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;
   background: linear-gradient(135deg, #003366 0%, #0066cc 40%, #0099cc 100%); }
-.hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1559767160-4d2e8f6f8e5a?w=1600&q=80') center/cover; opacity: 0.25; }
+.hero::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=1600&q=80') center/cover; opacity: 0.35; }
 .hero-content { position: relative; z-index: 1; max-width: 700px; padding: 40px 20px; }
 .hero h1 { color: #fff; font-size: 2.2rem; margin-bottom: 16px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
 .hero p { color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; margin-bottom: 28px; }
